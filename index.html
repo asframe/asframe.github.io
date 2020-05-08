@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title></title>
+		<style type="text/css">
+            body, html {
+                margin: 0;
+				padding: 0;
+				height: 100%;
+            }
+
+            #mainframe {
+                position:absolute;
+				left: 0;
+				right: 0;
+            }
+		</style>
+	</head>
+	<body>
+	    <script>
+		  const iframecmd = cmd => {
+		    let [com, content] = cmd.split("_____");
+			switch(com) {
+			    case "settitle":
+				    document.title = content;
+				break;
+				case "setapp":
+				    document.getElementById("app").innerHTML = content;
+				break;
+			}
+		  }
+          const onFrameLoad = () => {
+            window.addEventListener("message", (event) => {
+		      iframecmd(event.data);
+            }, false);
+          };
+        </script>
+		<div id="app"></div>
+		<div id="mainframe">
+			<iframe target="_top" src="https://script.google.com/macros/s/AKfycbysRYNiG_PGtMZZmoPQY1zoNfCJBI0lUQu5HBEC9T72XSXnoib3/exec" width="100%" height="100%" frameborder="0" onload="onFrameLoad(this)"/>
+		</div>
+	</body>
+</html>
